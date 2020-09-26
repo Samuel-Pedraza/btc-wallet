@@ -35,6 +35,12 @@
 		ipcRenderer.send("wallet:create", {
 			wallet
 		})
+	});
+
+	ipcRenderer.on('wallet:done', () => {
+		M.toast({
+			html: `Wallet Created!`
+		})
 	})
 
 
