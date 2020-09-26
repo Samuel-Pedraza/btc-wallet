@@ -4,23 +4,67 @@
     <meta charset="UTF-8">
     <title>BTC Wallet</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    
+        <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
+  
   <body>
-    <button id="generate_pk">Generate PK</button>
+      <div class="container">
+      	<div class="row">
+      		<div class="col s12">
+      			<h1 class="section">Sam's BTC Wallet</h1>
 
-    <p>Private Key: <span id="pk"></span></p>
-    <p>Public Key: <span id="public_k"></span></p>
+<!-- 			    <button id="generate_pk">Generate PK</button>
 
-	<h2>Wallet</h2>
+			    <p>Private Key: <span id="pk"></span></p>
+			    <p>Public Key: <span id="public_k"></span></p> -->
 
-	<form id="create-wallet">
-		<input type="text" id="wallet_name">
-		<input type="submit">
-	</form>
+			    <div class="section"></div>
+
+			    <ul class="collapsible ">
+				    <li>
+				      <div class="collapsible-header"><i class="material-icons">create_new_folder</i> Create A Wallet</div>
+				      <div class="collapsible-body">
+				      	<h4>Create A Wallet</h4>
+
+				      	<form id="create-wallet">
+				      		<input type="text" id="wallet_name" class="validate" placeholder="Wallet Name">
+				      		<input type="submit" class="btn">
+				      	</form>
+				      </div>
+				    </li>
+				    <li>
+				      <div class="collapsible-header"><i class="material-icons">whatshot</i>Add An Address</div>
+				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+				    </li>
+				    <li>
+				      <div class="collapsible-header"><i class="material-icons">send</i>Send a transaction</div>
+				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+				    </li>
+				  </ul>
+
+
+
+			</div>
+		</div>
+	</div>
 
   </body>
 </html>
+<script type="text/javascript">
+	document.addEventListener('DOMContentLoaded', function() {
+    	var elems = document.querySelectorAll('.collapsible');
+    	var instances = M.Collapsible.init(elems);
+  	});
+  </script>
 <script type="text/javascript">
 	const { ipcRenderer } = require('electron');
 	const bitcoin = require('bitcoinjs-lib');
@@ -61,3 +105,4 @@
 
 
 </script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
