@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>BTC Wallet</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
@@ -11,20 +11,47 @@
 
     <p>Private Key: <span id="pk"></span></p>
     <p>Public Key: <span id="public_k"></span></p>
+
+	<h2>Wallet</h2>
+
+	<form id="create-wallet">
+		<input type="text" id="wallet_name">
+		<input type="submit">
+	</form>
+
   </body>
 </html>
 <script type="text/javascript">
 	const { ipcRenderer } = require('electron');
 	const bitcoin = require('bitcoinjs-lib');
 
+	var form = document.getElementById("create-wallet");
 
-	document.getElementById("generate_pk").addEventListener("click", function(){
+	form.addEventListener("submit", e => {
+		e.preventDefault();
 
-		const keyPair = bitcoin.ECPair.makeRandom();
-      	const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
+		var wallet = document.getElementById("wallet_name").value;
 
-		document.getElementById("pk").innerHTML = keyPair.toWIF();
-		document.getElementById("public_k").innerHTML = address;
+		ipcRenderer.send("wallet:create", {
+			wallet
+		})
 	})
+
+
+	// document.getElementById("generate_pk").addEventListener("click", function(){
+
+	// 	const keyPair = bitcoin.ECPair.makeRandom();
+ //      	const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
+
+	// 	document.getElementById("pk").innerHTML = keyPair.toWIF();
+	// 	document.getElementById("public_k").innerHTML = address;
+
+	// 	ipcRenderer.send('address:save', {
+	// 		keyPair,
+	// 		address
+	// 	})
+	// });
+
+
 
 </script>

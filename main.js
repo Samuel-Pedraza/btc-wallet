@@ -1,5 +1,7 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const mysql = require('mysql');
+const net = require('net');
+
 
 function createWindow(){
 	const win = new BrowserWindow({
@@ -16,11 +18,14 @@ function createWindow(){
 app.whenReady().then(createWindow);
 
 
-// functionality needed
+let connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'password',
+	database: 'bitcoind'
+})
 
-// 1: generate an address
-// 2: save private key
-// 3: save public key
-// 4: check address to see if it has a balance
-// 5: display balance
-// 6: send transaction
+
+ipcMain.on('wallet:create', (e, options) => {
+	console.log(options);
+});
