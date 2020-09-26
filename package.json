@@ -15,5 +15,8 @@
     "electron-packager": "^15.1.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "bitcoinjs-lib": "^5.2.0"
   }
 }

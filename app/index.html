@@ -7,9 +7,21 @@
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chrome <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
+    <button id="generate_pk">Generate PK</button>
+
+    <p>Private Key: <span id="pk"></span></p>
   </body>
 </html>
+<script type="text/javascript">
+	const { ipcRenderer } = require('electron');
+	const bitcoin = require('bitcoinjs-lib');
+
+
+	document.getElementById("generate_pk").addEventListener("click", function(){
+
+		var key = bitcoin.ECPair.makeRandom().toWIF()
+
+		document.getElementById("pk").innerHTML = key;
+	})
+
+</script>
