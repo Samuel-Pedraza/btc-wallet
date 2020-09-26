@@ -10,6 +10,7 @@
     <button id="generate_pk">Generate PK</button>
 
     <p>Private Key: <span id="pk"></span></p>
+    <p>Public Key: <span id="public_k"></span></p>
   </body>
 </html>
 <script type="text/javascript">
@@ -19,9 +20,11 @@
 
 	document.getElementById("generate_pk").addEventListener("click", function(){
 
-		var key = bitcoin.ECPair.makeRandom().toWIF()
+		const keyPair = bitcoin.ECPair.makeRandom();
+      	const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey });
 
-		document.getElementById("pk").innerHTML = key;
+		document.getElementById("pk").innerHTML = keyPair.toWIF();
+		document.getElementById("public_k").innerHTML = address;
 	})
 
 </script>
