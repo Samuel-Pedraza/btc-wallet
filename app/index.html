@@ -12,10 +12,13 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
-  
+
+
   <body>
       <div class="container">
       	<div class="row">
@@ -44,8 +47,8 @@
 				    <li>
 				      <div class="collapsible-header"><i class="material-icons">add_circle</i>Add An Address</div>
 				      <div class="collapsible-body">
-				      	<div>
-				      		
+				      	<div id="app">
+				      	  
 				      	</div>
 				      </div>
 				    </li>
@@ -70,9 +73,9 @@
   	});
   </script>
 <script type="text/javascript">
-	const { ipcRenderer } = require('electron');
 	const bitcoin = require('bitcoinjs-lib');
 	const mysql = require('mysql');
+	const { ipcRenderer } = require('electron');
 
 	var form = document.getElementById("create-wallet");
 
@@ -92,11 +95,6 @@
 		})
 	})
 
-	ipcRenderer.on('wallet:list', (event, data) => {
-		console.log(data);
-	});
-
-
 	// document.getElementById("generate_pk").addEventListener("click", function(){
 
 	// 	const keyPair = bitcoin.ECPair.makeRandom();
@@ -114,4 +112,36 @@
 
 
 </script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript">
+	var superawesomedata;
+
+	ipcRenderer.on('wallet:list', (event, data) => {
+	}).then(function(response){
+		superawesomedata = response;
+	});
+
+	console.log(superawesomedata);
+
+	// var app = new Vue({
+	//   el: '#app',
+	//   data: {
+	//     message: ""
+	//   },
+	//   methods: 
+	// })
+	
+
+
+	// Vue.component('display-wallet', {
+	// 	data: function(){
+	// 		return {
+	// 			wallets: 
+	// 		}
+	// 	}
+	// })
+
+// i need to fetch wallets array from backend
+// loop through and display as a radio button
+
+</script>
+
