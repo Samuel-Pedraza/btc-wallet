@@ -3,28 +3,14 @@ const mysql = require('mysql');
 const net = require('net');
 
 let win;
-
-function createWindow(){
-	win = new BrowserWindow({
-		width: 800,
-		height: 800,
-		webPreferences: {
-			nodeIntegration: true
-		}
-	})
-
-	win.loadFile('./app/index.html')
-}
-
-app.whenReady().then(createWindow);
-
+let grab_wallet_information;
 
 let connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: 'password',
 	database: 'bitcoindb'
-})
+});
 
 
 connection.connect(function(err) {
@@ -33,14 +19,49 @@ connection.connect(function(err) {
   }
 });
 
+
+function createWindow(){
+	win = new BrowserWindow({
+		width: 800,
+		height: 800,
+		backgroundColor: "white",
+		webPreferences: {
+			nodeIntegration: true
+		},
+	})
+
+	win.loadFile('./app/index.html')
+}
+
+app.on('ready', () => {
+	createWindow()
+
+	let wallet_query = "SELECT * FROM wallet";
+
+	let list_of_wallets = connection.query(wallet_query, (error, results, fields) => {
+	  if (error) {
+	    return console.error(error.message);
+	  }
+	  
+	  win.webContents.on("did-finish-load", () => {
+		win.webContents.send("wallet:list", results);
+	  });
+	});
+	connection.end(); 
+
+});
+
+
 ipcMain.on('wallet:create', (e, options) => {
-	console.log(options);
+	
 
 	let sql = 'INSERT INTO wallet(wallet_name) VALUES("' + options.wallet + '")';
-	console.log(sql);
+	
 	connection.query(sql);
 	connection.end();
 
 	win.webContents.send('wallet:done');
 });
+
+
 

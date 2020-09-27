@@ -42,8 +42,12 @@
 				      </div>
 				    </li>
 				    <li>
-				      <div class="collapsible-header"><i class="material-icons">whatshot</i>Add An Address</div>
-				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+				      <div class="collapsible-header"><i class="material-icons">add_circle</i>Add An Address</div>
+				      <div class="collapsible-body">
+				      	<div>
+				      		
+				      	</div>
+				      </div>
 				    </li>
 				    <li>
 				      <div class="collapsible-header"><i class="material-icons">send</i>Send a transaction</div>
@@ -68,6 +72,7 @@
 <script type="text/javascript">
 	const { ipcRenderer } = require('electron');
 	const bitcoin = require('bitcoinjs-lib');
+	const mysql = require('mysql');
 
 	var form = document.getElementById("create-wallet");
 
@@ -86,6 +91,10 @@
 			html: `Wallet Created!`
 		})
 	})
+
+	ipcRenderer.on('wallet:list', (event, data) => {
+		console.log(data);
+	});
 
 
 	// document.getElementById("generate_pk").addEventListener("click", function(){
