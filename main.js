@@ -35,6 +35,11 @@ function createWindow(){
 
 app.on('ready', () => {
 	createWindow()
+});
+
+
+app.on('ready-to-show', () => {
+	createWindow()
 
 	let wallet_query = "SELECT * FROM wallet";
 
@@ -43,18 +48,16 @@ app.on('ready', () => {
 	    return console.error(error.message);
 	  }
 	  
-	  win.webContents.on("did-finish-load", () => {
+	  win.webContents.on("ready", () => {
 		win.webContents.send("wallet:list", results);
 	  });
 	});
-	connection.end(); 
+
 
 });
 
-
 ipcMain.on('wallet:create', (e, options) => {
 	
-
 	let sql = 'INSERT INTO wallet(wallet_name) VALUES("' + options.wallet + '")';
 	
 	connection.query(sql);
