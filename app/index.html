@@ -48,7 +48,18 @@
 				      <div class="collapsible-header"><i class="material-icons">add_circle</i>Add An Address</div>
 				      <div class="collapsible-body">
 				      	<div id="app">
-				      	  
+				      	<form>
+				      	  <ul>
+				      	    <li v-for="wallet in wallets">
+				      	    	<p>
+				      	    		<label>
+				      	    			<input name="wallet" type="radio" />
+				      	    			<span>{{ wallet.wallet_name }}</span>
+				      	    		</label>
+				      	    	</p>
+				      	    </li>
+				      	  </ul>
+				      	</form>
 				      	</div>
 				      </div>
 				    </li>
@@ -57,9 +68,6 @@
 				      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
 				    </li>
 				  </ul>
-
-
-
 			</div>
 		</div>
 	</div>
@@ -113,32 +121,24 @@
 
 </script>
 <script type="text/javascript">
-	var superawesomedata;
-
-	ipcRenderer.on('wallet:list', (event, data) => {
-	}).then(function(response){
-		superawesomedata = response;
-	});
-
-	console.log(superawesomedata);
-
-	// var app = new Vue({
-	//   el: '#app',
-	//   data: {
-	//     message: ""
-	//   },
-	//   methods: 
-	// })
 	
 
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+	    wallets: []
+	  },
+	  mounted: function () {
+		  this.$nextTick(function () {
+		    ipcRenderer.on('wallet:list', (event, data) => {
+		    	this.wallets = data;
+		    });
 
-	// Vue.component('display-wallet', {
-	// 	data: function(){
-	// 		return {
-	// 			wallets: 
-	// 		}
-	// 	}
-	// })
+		  })
+		}
+
+	})
+	
 
 // i need to fetch wallets array from backend
 // loop through and display as a radio button
