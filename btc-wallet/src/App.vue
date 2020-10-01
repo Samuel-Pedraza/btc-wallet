@@ -1,3 +1,4 @@
+
 <template>
   <div id="app">
     <Wallet msg="Sam's BTC Wallet"/>

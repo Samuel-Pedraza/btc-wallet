@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
+    <h1>Sam's BTC Wallet</h1>
 
     <h5>Add Wallet</h5>
     <input v-model="walletName" type="text" name="Add a Wallet">
@@ -12,9 +12,6 @@
 const { ipcRenderer } = require('electron');
 export default {
   name: 'Wallet',
-  props: {
-    msg: String
-  },
   data: function(){
     return {
       walletName : ""

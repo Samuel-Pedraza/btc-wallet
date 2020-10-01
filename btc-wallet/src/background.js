@@ -90,7 +90,47 @@ if (isDevelopment) {
   }
 }
 
+var data = [
+  {
+    ID: 1,
+    walletName : 'Wallet #1',
+    walletAddresses: ['address1', 'address2']
+  },
+  {
+    ID: 2,
+    walletName : 'Wallet #2',
+    walletAddresses: ['address1', 'address2']
+  },
+  {
+    ID: 3,
+    walletName : 'Wallet #3',
+    walletAddresses: ['address1', 'address2']
+  },
+  {
+    ID: 4,
+    walletName : 'Wallet #4',
+    walletAddresses: ['address1', 'address2']
+  },
+  {
+    ID: 5,
+    walletName : 'Wallet #5',
+    walletAddresses: ['address1', 'address2']
+  }
+];  
+
+
 
 ipcMain.on('wallet:create', (e, options) => {
-  console.log(options.wallet)
+  var lastId = data[data.length - 1].ID + 1;
+  var lastWalletName = options.wallet;
+  var hardCodedWalletAddress = ['address1', 'address2']
+
+  var dataWallet = {
+    ID: lastId,
+    walletName: lastWalletName.toString(),
+    walletAddresses : hardCodedWalletAddress
+  }
+
+  data.push(dataWallet);
+  console.log(data);
 })
