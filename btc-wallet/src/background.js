@@ -119,7 +119,6 @@ var data = [
 ];  
 
 
-
 ipcMain.on('wallet:create', (e, options) => {
   var lastId = data[data.length - 1].ID + 1;
   var lastWalletName = options.wallet;

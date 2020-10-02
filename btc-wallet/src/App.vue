@@ -2,16 +2,22 @@
 <template>
   <div id="app">
     <Wallet msg="Sam's BTC Wallet"/>
+    <AddAddress  />
+    <SendBTC />
   </div>
 </template>
 
 <script>
 import Wallet from './components/Wallet.vue'
+import AddAddress from './components/AddAddress.vue'
+import SendBTC from './components/SendBTC.vue'
 
 export default {
   name: 'App',
   components: {
-    Wallet
+    Wallet,
+    AddAddress,
+    SendBTC
   }
 }
 </script>
@@ -26,3 +32,4 @@ export default {
   margin-top: 60px;
 }
 </style>
+
