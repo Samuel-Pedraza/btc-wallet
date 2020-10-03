@@ -11,4 +11,5 @@ I'm hacking together a BTC wallet i can use on my PC. I'm using electron for the
 - [ ] 4: check address to see if it has a balance
 - [ ] 5: display balance
 - [ ] 6: send transaction
-- [ ] 7: implement SPV	
+- [ ] 7: implement SPV
+- [ ] 8: some other cool stuff as i think of it
